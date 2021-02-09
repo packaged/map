@@ -1,6 +1,10 @@
 <?php
 namespace Packaged\Map;
 
+/**
+ * Class ArrayDataMap
+ * @package Packaged\Map
+ */
 class ArrayDataMap extends DataMap
 {
   public function __construct(array $data = [])
@@ -16,13 +20,25 @@ class ArrayDataMap extends DataMap
     parent::__construct($data);
   }
 
+  /**
+   * @param string $key
+   * @param        $value
+   *
+   * @return $this
+   */
   public function set(string $key, $value)
   {
     $this->_data[$key] = is_array($value) ? $value : [$value];
     return $this;
   }
 
-  public function append(string $key, string $value)
+  /**
+   * @param string $key
+   * @param string $value
+   *
+   * @return $this
+   */
+  public function append(string $key, string $value): ArrayDataMap
   {
     if(!isset($this->_data[$key]))
     {
@@ -35,6 +51,13 @@ class ArrayDataMap extends DataMap
     return $this;
   }
 
+  /**
+   * @param string $key
+   * @param null   $defaultValue
+   * @param bool   $first
+   *
+   * @return mixed|null
+   */
   public function get(string $key, $defaultValue = null, $first = true)
   {
     if(!isset($this->_data[$key]))

@@ -115,6 +115,13 @@ class DataMapTest extends TestCase
     self::assertNotContains(['color' => 'red', 'fruit' => 'apple', 'dog' => 'poodle'], $data->all());
   }
 
+  public function testClear(): void
+  {
+    $data = $this->_simpleMap();
+    self::assertEquals(['fruit' => 'apple', 'color' => 'red', 'dog' => 'poodle'], $data->all());
+    self::assertEquals([], $data->clear()->all());
+  }
+
   public function testHas(): void
   {
     $data = $this->_simpleMap();

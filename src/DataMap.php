@@ -15,7 +15,7 @@ class DataMap implements IteratorAggregate, Countable
   /**
    * @var array
    */
-  protected $_data;
+  protected array $_data = [];
 
   /**
    * DataMap constructor.
@@ -27,7 +27,10 @@ class DataMap implements IteratorAggregate, Countable
     $this->_data = $data;
   }
 
-  public function clear()
+  /**
+   * @return $this
+   */
+  public function clear(): DataMap
   {
     $this->_data = [];
     return $this;
