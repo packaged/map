@@ -1,12 +1,27 @@
 <?php
 namespace Packaged\Map;
 
+use ArrayIterator;
+use Countable;
+use IteratorAggregate;
 use function count;
 
-class DataMap implements \IteratorAggregate, \Countable
+/**
+ * Class DataMap
+ * @package Packaged\Map
+ */
+class DataMap implements IteratorAggregate, Countable
 {
+  /**
+   * @var array
+   */
   protected $_data;
 
+  /**
+   * DataMap constructor.
+   *
+   * @param array $data
+   */
   public function __construct(array $data = [])
   {
     $this->_data = $data;
@@ -18,54 +33,107 @@ class DataMap implements \IteratorAggregate, \Countable
     return $this;
   }
 
+  /**
+   * @return array
+   */
   public function all(): array
   {
     return $this->_data;
   }
 
-  public function keys($filter = null, $strict = null): array
+  /**
+   * @return array
+   */
+  public function keys(): array
   {
-    return array_keys($this->_data, $filter, $strict);
+    return array_keys($this->_data);
   }
 
+  /**
+   * @param $filter
+   *
+   * @return array
+   */
+  public function filterKeys($filter): array
+  {
+    return array_keys($this->_data, $filter);
+  }
+
+  /**
+   * @return array
+   */
   public function values(): array
   {
     return array_values($this->_data);
   }
 
+  /**
+   * @param string $key
+   *
+   * @return bool
+   */
   public function has(string $key): bool
   {
     return array_key_exists($key, $this->_data);
   }
 
-  public function remove(string $key)
+  /**
+   * @param string $key
+   *
+   * @return $this
+   */
+  public function remove(string $key): DataMap
   {
     unset($this->_data[$key]);
     return $this;
   }
 
-  public function set(string $key, $value)
+  /**
+   * @param string $key
+   * @param        $value
+   *
+   * @return $this
+   */
+  public function set(string $key, $value): DataMap
   {
     $this->_data[$key] = $value;
     return $this;
   }
 
+  /**
+   * @param string $key
+   * @param null   $defaultValue
+   *
+   * @return mixed|null
+   */
   public function get(string $key, $defaultValue = null)
   {
     return $this->_data[$key] ?? $defaultValue;
   }
 
+  /**
+   * @param string $key
+   * @param int    $defaultValue
+   *
+   * @return int
+   */
   public function getInt(string $key, int $defaultValue = 0): int
   {
-    return (int)$this->_data[$key] ?? $defaultValue;
+    return (int)($this->_data[$key] ?? $defaultValue);
   }
 
-  public function getIterator()
+  /**
+   * @return ArrayIterator
+   */
+  public function getIterator(): ArrayIterator
   {
-    return new \ArrayIterator($this->_data);
+    return new ArrayIterator($this->_data);
   }
 
-  public function count()
+  /**
+   * @return int
+   */
+  public function count(): int
   {
     return count($this->_data);
   }
