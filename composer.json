@@ -1,0 +1,19 @@
+{
+  "name": "packaged/map",
+  "description": "Generic Map Helper",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Brooke Bryan",
+      "email": "brooke@bajb.net"
+    }
+  ],
+  "require": {
+    "php": ">=7.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Packaged\\Map\\": "src"
+    }
+  }
+}
