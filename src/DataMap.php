@@ -12,6 +12,12 @@ class DataMap implements \IteratorAggregate, \Countable
     $this->_data = $data;
   }
 
+  public function clear()
+  {
+    $this->_data = [];
+    return $this;
+  }
+
   public function all(): array
   {
     return $this->_data;
