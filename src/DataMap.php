@@ -12,10 +12,8 @@ use function count;
  */
 class DataMap implements IteratorAggregate, Countable
 {
-  /**
-   * @var array
-   */
-  protected array $_data = [];
+  /** @var array */
+  protected $_data;
 
   /**
    * DataMap constructor.
