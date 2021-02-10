@@ -95,7 +95,7 @@ class DataMap implements IteratorAggregate, Countable
    *
    * @return $this
    */
-  public function set(string $key, $value): DataMap
+  public function set(string $key, $value)
   {
     $this->_data[$key] = $value;
     return $this;
