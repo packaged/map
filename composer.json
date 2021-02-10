@@ -2,6 +2,7 @@
   "name": "packaged/map",
   "description": "Generic Map Helper",
   "license": "MIT",
+  "type": "library",
   "authors": [
     {
       "name": "Brooke Bryan",

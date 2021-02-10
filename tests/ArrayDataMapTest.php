@@ -9,15 +9,6 @@ use PHPUnit\Framework\TestCase;
 class ArrayDataMapTest extends TestCase
 {
 
-  protected function _simpleMap(): DataMap
-  {
-    $data = new DataMap();
-    $data->set('fruit', 'apple');
-    $data->set('color', 'red');
-    $data->set('dog', 'poodle');
-    return $data;
-  }
-
 //  public function testGet(): void
 //  {
 //    $data = $this->_simpleMap();
@@ -31,33 +22,33 @@ class ArrayDataMapTest extends TestCase
 
   public function testAppend(): void
   {
-    $data = $this->_simpleMap();
-    $array = new ArrayDataMap();
+    $data = ['a' => '1', 'b' => '2', 'c' => 3];
+    $arrayDataMap = new ArrayDataMap();
 
-    $array->set('1', $data->all());
-    $equals = [1 => $data->all()];
-    self::assertEquals($equals, $array->all());
+    $arrayDataMap->set('1', $data);
+    $equals = [1 => $data];
+    self::assertEquals($equals, $arrayDataMap->all());
 
-    $array->append('1', 'something');
+    $arrayDataMap->append('1', 'something');
     $equals['1'][] = 'something';
-    self::assertEquals($equals, $array->all());
+    self::assertEquals($equals, $arrayDataMap->all());
 
-    $array->append('2', 'something');
+    $arrayDataMap->append('2', 'something');
     $equals['2'][] = 'something';
-    self::assertEquals($equals, $array->all());
+    self::assertEquals($equals, $arrayDataMap->all());
   }
 
   public function testSet(): void
   {
-    $data = $this->_simpleMap();
+    $data = ['a' => '1', 'b' => '2', 'c' => 3];
     $array = new ArrayDataMap();
 
-    $array->set('1', $data->all());
-    $equals = [1 => $data->all()];
+    $array->set('1', $data);
+    $equals = [1 => $data];
     self::assertEquals($equals, $array->all());
 
-    $array->set('alt', $data->all());
-    $equals['alt'] = $data->all();
+    $array->set('alt', $data);
+    $equals['alt'] = $data;
     self::assertEquals($equals, $array->all());
 
     $array->set('new', [true, true, false]);

@@ -96,6 +96,24 @@ class DataMapTest extends TestCase
     $iterator = $data->getIterator();
     self::assertInstanceOf(Iterator::class, $data->getIterator());
     self::assertEquals(0, $iterator->count());
+
+    $data = new DataMap();
+    $data->set('fruit', 'apple')->set('color', 'red')->set('dog', 'poodle');
+    $comparison = ['fruit' => 'apple', 'color' => 'red', 'dog' => 'poodle'];
+    $arrayValues = $data->getIterator();
+
+    $count = 0;
+    foreach($arrayValues as $key => $arrayValue)
+    {
+      $count++;
+      if($comparison[$key] === $arrayValue)
+      {
+        unset($comparison[$key]);
+      }
+    }
+
+    self::assertEquals(3, $count);
+    self::assertEmpty($comparison);
   }
 
   public function testCount(): void
