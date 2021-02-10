@@ -3,22 +3,26 @@
 namespace Packaged\Map\Tests;
 
 use Packaged\Map\ArrayDataMap;
-use Packaged\Map\DataMap;
 use PHPUnit\Framework\TestCase;
 
 class ArrayDataMapTest extends TestCase
 {
 
-//  public function testGet(): void
-//  {
-//    $data = $this->_simpleMap();
-//    $array = new ArrayDataMap();
-//
-//    $array->set('1', $data->all());
-//    $array->set('something', $data->all());
-//    self::assertEquals($data->all(), $array->get('1'));
-//    //TODO IS THIS IS BROKE? GET RETUNS THE FIRST KEY IN THE ARRAY[ARRAY[v]]
-//  }
+  public function testGet(): void
+  {
+    $array = new ArrayDataMap();
+
+    $array->set('a', '1');
+    $array->set('b', '2');
+    $array->set('c', 3);
+
+    self::assertEquals($array->get('a'), '1');
+    self::assertEquals($array->get('b'), '2');
+    self::assertEquals($array->get('c'), 3);
+
+    $array->set('d', ['x' => 'y', 'z']);
+    self::assertEquals($array->get('d'), ['a' => 'y', 'z']);
+  }
 
   public function testAppend(): void
   {
