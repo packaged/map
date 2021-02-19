@@ -3,6 +3,19 @@ namespace Packaged\Map;
 
 class ArrayDataMap extends DataMap
 {
+  public function __construct(array $data = [])
+  {
+    //Ensure each value is an array
+    foreach($data as $k => $v)
+    {
+      if(!is_array($v))
+      {
+        $data[$k] = [$v];
+      }
+    }
+    parent::__construct($data);
+  }
+
   public function set(string $key, $value)
   {
     $this->_data[$key] = is_array($value) ? $value : [$value];
