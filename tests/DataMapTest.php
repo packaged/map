@@ -120,24 +120,23 @@ class DataMapTest extends TestCase
   {
     $data = $this->_simpleMap();
     self::assertEquals(3, $data->count());
-    self::assertNotEquals(4, $data->count());
     $data->set('orange', 'pears');
     self::assertEquals(4, $data->count());
-    self::assertNotEquals(3, $data->count());
   }
 
   public function testAll(): void
   {
     $data = $this->_simpleMap();
     self::assertEquals(['fruit' => 'apple', 'color' => 'red', 'dog' => 'poodle'], $data->all());
-    self::assertNotContains(['color' => 'red', 'fruit' => 'apple', 'dog' => 'poodle'], $data->all());
   }
 
   public function testClear(): void
   {
     $data = $this->_simpleMap();
     self::assertEquals(['fruit' => 'apple', 'color' => 'red', 'dog' => 'poodle'], $data->all());
+    self::assertEquals(3, $data->count());
     self::assertEquals([], $data->clear()->all());
+    self::assertEquals(0, $data->count());
   }
 
   public function testHas(): void
@@ -153,10 +152,13 @@ class DataMapTest extends TestCase
   public function testGetInt(): void
   {
     $data = $this->_simpleMap();
-    $data->set(1, 2);
+    $data->set(1, 5);
     self::assertEquals(1, $data->getInt('time', 1));
-    self::assertEquals(2, $data->getInt(1, 1));
-    self::assertEquals(2, $data->getInt(1));
+    self::assertEquals(5, $data->getInt(1, 1));
+    self::assertEquals(5, $data->getInt(1));
     self::assertEquals(1, $data->getInt('time', 1));
+    $data->set(1, 3);
+    self::assertEquals(3, $data->getInt(1, 1));
+    self::assertEquals(3, $data->getInt(1));
   }
 }
