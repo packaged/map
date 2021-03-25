@@ -2,6 +2,7 @@
   "name": "packaged/map",
   "description": "Generic Map Helper",
   "license": "MIT",
+  "type": "library",
   "authors": [
     {
       "name": "Brooke Bryan",
@@ -11,9 +12,17 @@
   "require": {
     "php": ">=7.3"
   },
+  "require-dev": {
+    "phpunit/phpunit": "^9.3.8"
+  },
   "autoload": {
     "psr-4": {
       "Packaged\\Map\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Packaged\\Map\\Tests\\": "tests"
     }
   }
 }
