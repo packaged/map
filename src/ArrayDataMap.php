@@ -3,33 +3,14 @@ namespace Packaged\Map;
 
 /**
  * Class ArrayDataMap
+ *
  * @package Packaged\Map
  */
-class ArrayDataMap extends DataMap
+class ArrayDataMap extends TypedDataMap
 {
   public function __construct(array $data = [])
   {
-    //Ensure each value is an array
-    foreach($data as $k => $v)
-    {
-      if(!is_array($v))
-      {
-        $data[$k] = [$v];
-      }
-    }
-    parent::__construct($data);
-  }
-
-  /**
-   * @param string $key
-   * @param        $value
-   *
-   * @return $this
-   */
-  public function set(string $key, $value)
-  {
-    $this->_data[$key] = is_array($value) ? $value : [$value];
-    return $this;
+    parent::__construct($data, function ($value) { return is_array($value) ? $value : [$value]; });
   }
 
   /**

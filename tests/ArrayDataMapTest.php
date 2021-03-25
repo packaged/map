@@ -16,12 +16,22 @@ class ArrayDataMapTest extends TestCase
     $array->set('b', '2');
     $array->set('c', 3);
 
-    self::assertEquals($array->get('a'), '1');
-    self::assertEquals($array->get('b'), '2');
-    self::assertEquals($array->get('c'), 3);
+    self::assertEquals('1', $array->get('a'));
+    self::assertEquals('2', $array->get('b'));
+    self::assertEquals(3, $array->get('c'));
 
     $array->set('d', ['x' => 'y', 'z']);
-    self::assertEquals($array->get('d'), ['a' => 'y', 'z']);
+    self::assertEquals(['x' => 'y', 'z'], $array->get('d', null, false));
+    self::assertEquals('failed', $array->get('ff', 'failed', true));
+    self::assertEquals('failed2', $array->get('ff', 'failed2', false));
+  }
+
+  public function testConstruct()
+  {
+    $array = new ArrayDataMap(['a' => 'b', 'c' => ['d', 'e']]);
+
+    self::assertEquals('b', $array->get('a'));
+    self::assertEquals(['d', 'e'], $array->get('c', null, false));
   }
 
   public function testAppend(): void
