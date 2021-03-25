@@ -8,10 +8,9 @@ namespace Packaged\Map;
  */
 class ArrayDataMap extends TypedDataMap
 {
-  public function __construct(array $data = [])
-  {
-    parent::__construct($data, function ($value) { return is_array($value) ? $value : [$value]; });
-  }
+  public function __construct(array $data = []) { parent::__construct($data, [ArrayDataMap::class, 'toArray']); }
+
+  public static function toArray($value) { return is_array($value) ? $value : [$value]; }
 
   /**
    * @param string $key
